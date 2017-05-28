@@ -474,7 +474,7 @@ var TimeGrid = FC.TimeGrid = Grid.extend(DayTableMixin, {
 		}
 
 		// render an arrow over the axis
-		if (segs.length > 0) { // is the current time in view?
+		if (segs.length > 0 && !this.view.opt('hideAgendaAxis')) { // is the current time in view?
 			nodes.push($('<div class="fc-now-indicator fc-now-indicator-arrow"></div>')
 				.css('top', top)
 				.appendTo(this.el.find('.fc-content-skeleton'))[0]);
