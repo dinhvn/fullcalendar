@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+<link href='../dist/fullcalendar.css' rel='stylesheet' />
+<link href='../dist/fullcalendar.print.css' rel='stylesheet' media='print' />
+<script src='../node_modules/moment/moment.js'></script>
+<script src='../node_modules/jquery/dist/jquery.js'></script>
+<script src='../dist/fullcalendar.js'></script>
+<script>
+
+	$(document).ready(function() {
+		
+		$('#calendar').fullCalendar({
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
+			defaultDate: '2017-05-12',
+			defaultView: 'agendaWeek',
+			navLinks: true, // can click day/week names to navigate views
+			selectable: true,
+			selectHelper: true,
+			select: function(start, end) {
+				
+			},
+			eventRender: function(event, element) {
+				var iconDiv = element.find("div.fc-icon");
+				iconDiv.append($("<span class='icon-conference'/>"));
+				iconDiv.append($("<span class='icon-private'/>"));
+				iconDiv.append($("<span class='icon-breaktime'/>"));
+				iconDiv.append($("<span class='icon-alarm'/>"));
+				iconDiv.append($("<span class='icon-cycle'/>"));
+			},
+			editable: true,
+			eventLimit: true, // allow "more" link when too many events
+			events: [
+				{
+					title: 'Long Event',
+					start: '2017-05-07',
+					end: '2017-05-10',
+					color: '#454fdf',
+					textColor: '#c78ab3'
+				},
+				{
+					id: 999,
+					title: 'Repeating Event',
+					start: '2017-05-09T16:00:00',
+					color: '#c78ab3'
+				},
+				{
+					id: 999,
+					title: 'Repeating Event',
+					start: '2017-05-16T16:00:00',
+					color: '#f2f2f2'
+				},
+				{
+					title: 'Conference',
+					start: '2017-05-11',
+					end: '2017-05-13',
+					color: '#c78ab3'
+				},
+				{
+					title: 'Meeting',
+					start: '2017-05-12T10:30:00',
+					end: '2017-05-12T12:30:00',
+					color: '#0e2f44'
+				},
+				{
+					title: 'Lunch',
+					start: '2017-05-12T12:00:00',
+					color: '#839485'
+				},
+				{
+					title: 'Meeting',
+					start: '2017-05-12T14:30:00',
+					color: '#f82831'
+				},
+				{
+					title: 'Birthday Party',
+					start: '2017-05-13T07:00:00',
+					color: '#5245ce'
+				},
+				{
+					title: 'AAAAAAAAAA',
+					start: '2017-05-10T14:00:00',
+					end: '2017-05-10T14:30:00',
+					color: '#f82831'
+				}
+			]
+		});
+		
+	});
+
+</script>
+<style>
+
+	body {
+		margin: 40px 10px;
+		padding: 0;
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+		font-size: 14px;
+	}
+
+	#calendar {
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+</style>
+</head>
+<body>
+
+	<div id='calendar'></div>
+
+</body>
+</html>

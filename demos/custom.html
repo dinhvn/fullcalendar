@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+<link href='../dist/fullcalendar.css' rel='stylesheet' />
+<link href='../dist/fullcalendar.print.css' rel='stylesheet' media='print' />
+<script src='../node_modules/moment/moment.js'></script>
+<script src='../node_modules/jquery/dist/jquery.js'></script>
+<script src='../dist/fullcalendar.js'></script>
+<script>
+
+	$(document).ready(function() {
+		var options = {
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
+			customHeader: {
+				name: 'Nguyen Van A',
+				image: '../dist/b/out/content/images/profile.jpg'
+			},
+			nowIndicator: true,
+			hideAgendaGutter: true,
+			defaultView: 'agendaWeek',
+			hideAgendaAxis: true,
+			defaultDate: '2017-03-21',
+			columnFormat: 'D ddd',
+			navLinks: false, // can click day/week names to navigate views
+			editable: true,
+            selectable: true,
+			eventLimit: true, // allow "more" link when too many events
+			height: 400,
+			droppable:true,
+			events: [
+				{
+					title: 'All Day Event',
+					start: '2017-03-12'
+				},
+				{
+					title: 'Long Event',
+					start: '2017-03-14',
+					end: '2017-02-10'
+				},
+				{
+					id: 999,
+					title: 'Repeating Event',
+					start: '2017-03-21T12:00:00'
+				}
+			]
+		};
+
+		var header = {
+			header: {
+				left: 'today',
+				center: '',
+				right: ''
+			},
+			noneHeader: true,
+			nowIndicator: true,
+			hideAgendaGutter: true,
+			defaultView: 'agendaWeek',
+			hideAgendaAxis: false,
+			defaultDate: '2017-03-21',
+			navLinks: true, // can click day/week names to navigate views
+			editable: true,
+            selectable: true,
+			eventLimit: true, // allow "more" link when too many events
+			height: 400,
+			hideAgendaContent: true,
+			events: []
+		};
+
+		$('.zac-calendar-header').fullCalendar(header);
+		$('.zac-calendar').fullCalendar(options);
+		// hide 
+		$('.zac-calendar').fullCalendar( "option" , "hideAgendaScroller" , true );
+		$('.zac-calendar').fullCalendar( "option" , "hideAgendaAxis" , true );
+
+		// Init scroll position
+		$('.scroll-content').height($('.fc-time-grid').height());
+		$('.scroll-area').find('.scroll').scrollTop( $('.zac-calendar-header').find('.fc-scroller').scrollTop());
+
+		$('.zac-calendar-header').fullCalendar( "option" , "hideAgendaScroller" , true );
+		var elm = $('.scroll-area').find('.scroll');
+		elm.scroll(function(e) {
+			var scrollToTop = elm.scrollTop();
+			$('.zac-calendar').find('.fc-scroller').scrollTop(scrollToTop);
+			$('.zac-calendar-header').find('.fc-scroller').scrollTop(scrollToTop);
+		});
+
+		 $('.zac-calendar').bind('mousewheel', function(e) {
+			let currentPos = $('.scroll-area').find('.scroll').scrollTop() - e.originalEvent.wheelDelta;
+			$('.zac-calendar').find('.fc-scroller').scrollTop(currentPos);
+			$('.zac-calendar-header').find('.fc-scroller').scrollTop(currentPos);
+			$('.scroll-area').find('.scroll').scrollTop(currentPos);
+		 });
+
+		$('#today').click(function(){
+			$('.zac-calendar').fullCalendar('today');
+		});
+		$('#prev').click(function(){
+			$('.zac-calendar').fullCalendar('prev');
+		});
+		$('#next').click(function(){
+			$('.zac-calendar').fullCalendar('next');
+		});
+		$('#next').click(function(){
+			$('.zac-calendar').fullCalendar('next');
+		});
+		$('#next').click(function(){
+			$('.zac-calendar').fullCalendar('next');
+		});
+		$('#dayView').click(function(){
+			$('.zac-calendar').fullCalendar('changeView', 'agendaDay');
+			$('.zac-calendar-header').show();
+		});
+		$('#weekView').click(function(){
+			$('.zac-calendar').fullCalendar('changeView', 'agendaWeek');
+			$('.zac-calendar-header').show();
+		});
+		$('#monthView').click(function(){
+			$('.zac-calendar').fullCalendar('changeView', 'month');
+			$('.zac-calendar-header').hide();
+		});
+	});
+
+</script>
+<style>
+
+	body {
+		margin: 40px 10px;
+		padding: 0;
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+		font-size: 14px;
+	}
+
+	.main {
+		width: 100%;
+		height: 100%;
+		white-space: nowrap;
+		display: flex;
+	}
+	.time-area {
+		
+		position: relative;
+		max-width: 100%;
+		height: 100%;
+		float: none;
+		box-sizing: border-box;
+		z-index: 11;
+	}
+	.content-area {
+		position: relative;
+		height: 100%;
+		flex-basis: 0%;
+		flex-grow: 1;
+		flex-shrink: 1;
+		box-sizing: border-box;
+		overflow: auto;
+		z-index: 0;
+	}
+	.scroll-area {
+		flex-shrink: 2;
+	}
+	.calendar-area {
+		white-space: nowrap;
+		display: inline-block;
+	}
+	.zac-calendar {
+		width: 500px;
+		display: inline-block;
+	}
+	.zac-calendar-header {
+		width: 60px;
+	}
+
+	.scroll {
+		background: #f6f6f6;
+		width: 20px;
+		height: 310px;
+		overflow: scroll;
+		margin-top: 107px;
+	}
+	.scroll-content {
+		/*height: 1055px;*/
+	}
+
+	.full {
+		display: flex;
+		height: 100%;
+		padding: 16px;
+	}
+
+	.left-panel {
+		width: 200px;
+		position: relative;
+		max-width: 100%;
+		height: 100%;
+		float: none;
+		border-right: 4px solid #888;
+		box-sizing: border-box;
+		z-index: 11;
+	}
+
+	.right-panel {
+		position: relative;
+		height: 100%;
+		flex-basis: 0%;
+		flex-grow: 1;
+		flex-shrink: 1;
+		box-sizing: border-box;
+		overflow: auto;
+		z-index: 0;
+	}
+	.menu {
+		display: inline-flex;
+	}
+	.menu-left {
+		margin-left: 200px;
+	}
+	.menu-right {
+		margin-left: 100px;
+	}
+
+</style>
+</head>
+<body>
+	<div class="menu">
+		<div class="menu-left">
+			<button id="prev">Prev</button>
+			<button id="today">Today</button>
+			<button id="next">Next</button>
+		</div>
+		<div class="menu-right">
+			<button id="dayView">day</button>
+			<button id="weekView">Week</button>
+			<button id="monthView">Month</button>
+		</div>
+	</div>
+
+	<div class="full">
+		<div class="left-panel">
+		</div>
+		<div class="right-panel">
+			<div class="main">
+				<div class="time-area">
+					<div class="zac-calendar-header"></div>
+				</div>
+				<div class="content-area">
+					<div class="zac-calendar"></div>
+					<div class="zac-calendar"></div>
+				</div>
+				<div class="scroll-area">
+					<div class="scroll">
+						<div class="scroll-content"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
