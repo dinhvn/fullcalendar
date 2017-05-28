@@ -174,6 +174,7 @@ var DayGrid = FC.DayGrid = Grid.extend(DayTableMixin, {
 				''
 				) +
 			'>';
+		html += '<div class="fc-border-top"></div>';
 
 		if (view.cellWeekNumbersVisible && (date.day() == weekCalcFirstDoW)) {
 			html += view.buildGotoAnchorHtml(

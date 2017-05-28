@@ -98,29 +98,29 @@
 
 		$('#today').click(function(){
 			$('.zac-calendar').fullCalendar('today');
+			$('.zac-calendar-header').fullCalendar('today');
 		});
 		$('#prev').click(function(){
 			$('.zac-calendar').fullCalendar('prev');
+			$('.zac-calendar-header').fullCalendar('prev');
 		});
 		$('#next').click(function(){
 			$('.zac-calendar').fullCalendar('next');
-		});
-		$('#next').click(function(){
-			$('.zac-calendar').fullCalendar('next');
-		});
-		$('#next').click(function(){
-			$('.zac-calendar').fullCalendar('next');
+			$('.zac-calendar-header').fullCalendar('next');
 		});
 		$('#dayView').click(function(){
-			$('.zac-calendar').fullCalendar('changeView', 'agendaDay');
 			$('.zac-calendar-header').show();
+			$('.zac-calendar').fullCalendar('changeView', 'agendaDay');
+			$('.zac-calendar-header').fullCalendar('changeView', 'agendaDay');
 		});
 		$('#weekView').click(function(){
-			$('.zac-calendar').fullCalendar('changeView', 'agendaWeek');
 			$('.zac-calendar-header').show();
+			$('.zac-calendar').fullCalendar('changeView', 'agendaWeek');
+			$('.zzac-calendar-header').fullCalendar('changeView', 'agendaWeek');
 		});
 		$('#monthView').click(function(){
 			$('.zac-calendar').fullCalendar('changeView', 'month');
+			$('.zac-calendar-header').fullCalendar('changeView', 'agendaWeek');
 			$('.zac-calendar-header').hide();
 		});
 	});
@@ -249,7 +249,7 @@
 				</div>
 				<div class="content-area">
 					<div class="zac-calendar"></div>
-					<div class="zac-calendar"></div>
+					<!--<div class="zac-calendar"></div>-->
 				</div>
 				<div class="scroll-area">
 					<div class="scroll">

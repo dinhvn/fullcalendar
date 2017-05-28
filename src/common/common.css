@@ -889,3 +889,21 @@ a.fc-more:hover {
 	margin-bottom: 4px !important;
 	height: 30px;
 }
+
+/* Today border*/
+.fc-today .fc-head-date {
+	border-top: 2px solid #ff9900;
+	box-sizing: border-box;
+	background: #fcf8e3;
+}
+.fc-today-day .fc-head-date {
+	border-top: 2px solid #ff9900;
+	box-sizing: border-box;
+}
+
+.fc-today .fc-border-top {
+	border-top: 2px solid #ff9900;
+	width: 100%;
+	display: flex;
+}
+

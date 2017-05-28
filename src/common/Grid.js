@@ -713,7 +713,11 @@ var Grid = FC.Grid = Class.extend(ListenerMixin, {
 			today = view.calendar.getNow();
 
 			if (date.isSame(today, 'day')) {
-				classes.push('fc-today');
+				if (this.view.name === 'agendaDay') {
+					classes.push('fc-today-day');
+				} else {
+					classes.push('fc-today');
+				}
 
 				if (noThemeHighlight !== true) {
 					classes.push(view.highlightStateClass);
