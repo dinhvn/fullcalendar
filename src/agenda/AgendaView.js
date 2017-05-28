@@ -209,7 +209,7 @@ var AgendaView = FC.AgendaView = View.extend({
 	// Refreshes the horizontal dimensions of the view
 	updateWidth: function() {
 		// make all axis cells line up, and record the width so newly created axis cells will have it
-		this.axisWidth = this.el.find('.hide-fc-axis').length === 0 ? matchCellWidths(this.el.find('.fc-axis')) : 0;
+		this.axisWidth = matchCellWidths(this.el.find('.fc-axis'));
 	},
 
 
@@ -475,10 +475,14 @@ var agendaTimeGridMethods = {
 
 
 	// Generates the HTML that will go before the day-of week header cells
+	// Generates the HTML that will go before the day-of week header cells
 	renderHeadIntroHtml: function() {
 		var view = this.view;
 		var weekText;
-		var hideAxisClass = view.opt('hideAgendaAxis') ? 'hide-fc-axis' : '';
+
+		if (view.opt('hideAgendaAxis')) {
+			return '';
+		}
 
 		if (view.opt('weekNumbers')) {
 			weekText = this.start.format(view.opt('smallWeekFormat'));
@@ -492,7 +496,7 @@ var agendaTimeGridMethods = {
 				'</th>';
 		}
 		else {
-			return '<th class="fc-axis ' + hideAxisClass + ' ' + view.widgetHeaderClass + '" ' + view.axisStyleAttr() + '></th>';
+			return '<th class="fc-axis ' + view.widgetHeaderClass + '" ' + view.axisStyleAttr() + '></th>';
 		}
 	},
 
@@ -500,6 +504,10 @@ var agendaTimeGridMethods = {
 	// Generates the HTML that goes before the bg of the TimeGrid slot area. Long vertical column.
 	renderBgIntroHtml: function() {
 		var view = this.view;
+
+		if (view.opt('hideAgendaAxis')) {
+			return '';
+		}
 
 		return '<td class="fc-axis ' + view.widgetContentClass + '" ' + view.axisStyleAttr() + '></td>';
 	},
@@ -509,6 +517,10 @@ var agendaTimeGridMethods = {
 	// Affects content-skeleton, helper-skeleton, highlight-skeleton for both the time-grid and day-grid.
 	renderIntroHtml: function() {
 		var view = this.view;
+
+		if (view.opt('hideAgendaAxis')) {
+			return '';
+		}
 
 		return '<td class="fc-axis" ' + view.axisStyleAttr() + '></td>';
 	}
@@ -523,10 +535,13 @@ var agendaDayGridMethods = {
 	// Generates the HTML that goes before the all-day cells
 	renderBgIntroHtml: function() {
 		var view = this.view;
-		var hideAxisClass = view.opt('hideAgendaAxis') ? 'hide-fc-axis' : '';
+
+		if (view.opt('hideAgendaAxis')) {
+			return '';
+		}
 
 		return '' +
-			'<td class="fc-axis ' + hideAxisClass + ' ' + view.widgetContentClass + '" ' + view.axisStyleAttr() + '>' +
+			'<td class="fc-axis ' + view.widgetContentClass + '" ' + view.axisStyleAttr() + '>' +
 				'<span>' + // needed for matchCellWidths
 					view.getAllDayHtml() +
 				'</span>' +
@@ -538,6 +553,10 @@ var agendaDayGridMethods = {
 	// Affects content-skeleton, helper-skeleton, highlight-skeleton for both the time-grid and day-grid.
 	renderIntroHtml: function() {
 		var view = this.view;
+
+		if (view.opt('hideAgendaAxis')) {
+			return '';
+		}
 
 		return '<td class="fc-axis" ' + view.axisStyleAttr() + '></td>';
 	}

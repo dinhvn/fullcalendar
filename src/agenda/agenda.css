@@ -26,10 +26,6 @@
 	background: #f6f6f6;
 }
 
-.fc .hide-fc-axis {
-	display: none;
-}
-
 .fc-ltr .fc-axis {
 	text-align: right;
 }

@@ -73,24 +73,26 @@ var TimeGrid = FC.TimeGrid = Grid.extend(DayTableMixin, {
 		var slotDate; // will be on the view's first day, but we only care about its time
 		var isLabeled;
 		var axisHtml;
-		var hideAxisClass = view.opt('hideAgendaAxis') ? 'hide-fc-axis' : '';
-
 		// Calculate the time for each slot
 		while (slotTime < this.view.maxTime) {
 			slotDate = this.start.clone().time(slotTime);
 			isLabeled = isInt(divideDurationByDuration(slotTime, this.labelInterval));
 
-			axisHtml =
-				'<td class="fc-axis fc-time ' + hideAxisClass + ' ' + view.widgetContentClass + '" ' + view.axisStyleAttr() + '>' +
-					(isLabeled ?
-						'<span>' + // for matchCellWidths
-							htmlEscape(slotDate.format(this.labelFormat)) +
-						'</span>' :
-						''
-						) +
-				'</td>';
+			if(view.opt('hideAgendaAxis')) {
+				axisHtml = '';
+			} else {
+				axisHtml =
+					'<td class="fc-axis fc-time ' + view.widgetContentClass + '" ' + view.axisStyleAttr() + '>' +
+						(isLabeled ?
+							'<span>' + // for matchCellWidths
+								htmlEscape(slotDate.format(this.labelFormat)) +
+							'</span>' :
+							''
+							) +
+					'</td>';
+			}
 
-			if(view.opt('hideAgendaContent'))
+			if (view.opt('hideAgendaContent'))
 			{
 				html +=
 					'<tr data-time="' + slotDate.format('HH:mm:ss') + '"' +
