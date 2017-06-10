@@ -907,3 +907,6 @@ a.fc-more:hover {
 	display: flex;
 }
 
+.fc-time-grid-container::-webkit-scrollbar {
+   
+}
