@@ -1,5 +1,7 @@
+var defaultFirstDay = 0;
 var options = {
-	view: "agendaWeek"
+	view: "agendaWeek",
+	firstDay: defaultFirstDay
 }
 
 var element = $('.zac-calendar');
@@ -27,16 +29,19 @@ $(document).ready(function () {
 	});
 
 	$('#today').click(function () {
-		element.fullCalendar('today');
-		headerElement.fullCalendar('today');
+		today();
 	});
 	$('#prev').click(function () {
-		element.fullCalendar('prev');
-		headerElement.fullCalendar('prev');
+		prev();
+	});
+	$('#prev2').click(function () {
+		moveOneDay(-1);
 	});
 	$('#next').click(function () {
-		element.fullCalendar('next');
-		headerElement.fullCalendar('next');
+		next();
+	});
+	$('#next2').click(function () {
+		moveOneDay(1);
 	});
 	$('#dayView').click(function () {
 		changeView('agendaDay')
@@ -68,7 +73,8 @@ createFullCalendar = function (options) {
 		defaultView: options.view == "weekday" ? 'agendaWeek' : options.view,
 		hideAgendaAxis: true,
 		hideAgendaScroller: true,
-		defaultDate: '2017-03-21',
+		defaultDate: new Date(),
+		firstDay: options.firstDay,
 		columnFormat: 'D ddd',
 		navLinks: false, // can click day/week names to navigate views
 		editable: true,
@@ -91,7 +97,7 @@ createFullCalendar = function (options) {
 		defaultView: 'agendaWeek',
 		hideAgendaAxis: false,
 		hideAgendaScroller: true,
-		defaultDate: '2017-03-21',
+		defaultDate: new Date(),
 		navLinks: true, // can click day/week names to navigate views
 		editable: true,
 		selectable: true,
@@ -123,21 +129,37 @@ renderEvent = function () {
 	var events = [
 		{
 			title: 'All Day Event',
-			start: '2017-03-12'
+			start: moment().format('YYYY-MM-DD')
 		},
 		{
-			title: 'Long Event',
-			start: '2017-03-14',
-			end: '2017-02-10'
+			title: 'Event 1',
+			start: moment().set('hour', 7).set('minute', 0),
+			end: moment().set('hour', 9).set('minute', 0),
 		},
 		{
 			id: 999,
-			title: 'Repeating Event',
-			start: '2017-03-21T12:00:00'
+			title: 'Event 2',
+			start: moment().add('days', -1).set('hour', 9).set('minute', 0),
+		},
+		{
+			title: 'Event 3',
+			start: moment().add('days', -2).set('hour', 7).set('minute', 0),
+		},
+		{
+			title: 'Event 4',
+			start: moment().add('days', -1).set('hour', 8).set('minute', 0),
+		},
+		{
+			title: 'Event 5',
+			start: moment().add('days', 2).set('hour', 7).set('minute', 0),
+		},
+		{
+			title: 'Event 6',
+			start: moment().add('days', 1).set('hour', 8).set('minute', 0),
 		}
 	]
-	element.fullCalendar('renderEvents', events);
-	SchedulerUtil.reload();
+	element.fullCalendar('renderEvents', events, true);
+	//SchedulerUtil.reload();
 }
 
 changeView = function (value) {
@@ -155,6 +177,8 @@ changeView = function (value) {
 	if (beforeView == "weekday" || nowView == "weekday")
 		recycleFullCalendar();
 
+	options.firstDay = defaultFirstDay;
+	element.fullCalendar("option", 'firstDay', options.firstDay);
 	//$(window).trigger("reload");
 	return this;
 }
@@ -179,4 +203,69 @@ _changeMonth = function () {
 	options.view = "month";
 	headerElement.hide();
 	return this;
+}
+
+today = function () {
+	if (options.firstDay != defaultFirstDay) {
+		options.firstDay = defaultFirstDay;
+		element.fullCalendar("option", 'firstDay', options.firstDay);
+	}
+	element.fullCalendar('today');
+}
+
+prev = function () {
+	if (options.firstDay != defaultFirstDay) {
+		options.firstDay = defaultFirstDay;
+		element.fullCalendar("option", 'firstDay', options.firstDay);
+	} else {
+		element.fullCalendar('prev');
+	}
+}
+
+next = function () {
+	if (options.firstDay != defaultFirstDay) {
+		options.firstDay = defaultFirstDay;
+		element.fullCalendar("option", 'firstDay', options.firstDay);
+	} else {
+		element.fullCalendar('next');
+	}
+}
+
+moveOneDay = function (type) {
+	if (options.view == 'month' || options.view == 'agendaDay') {
+		return;
+	}
+	if (type == 1) {
+		options.firstDay += 1;
+		if (options.view == 'weekday' && options.firstDay < 2) {
+			// Ignore Monday
+			options.firstDay += 1;
+		}
+
+		if (options.firstDay > 2) {
+			element.fullCalendar('next');
+		}
+
+		if (options.firstDay == 7) {
+			options.firstDay = 0;
+		} else if (options.view == 'weekday' && options.firstDay == 6) {
+			// Ignore Sacturday
+			options.firstDay = 2;
+		}
+
+		element.fullCalendar("option", 'firstDay', options.firstDay);
+	} else {
+		options.firstDay -= 1;
+		if (options.view == 'weekday' && options.firstDay < 2) {
+			// Ignore Monday
+			options.firstDay = 5;
+		} else if (options.firstDay < 0) {
+			options.firstDay = 6;
+		}
+
+		element.fullCalendar("option", 'firstDay', options.firstDay);
+		if (options.firstDay > 5 || (options.view == 'weekday' && options.firstDay > 4)) {
+			element.fullCalendar('prev');
+		}
+	}
 }
