@@ -168,14 +168,11 @@ changeView = function (value) {
 	if (value == "agendaDay")
 		_changeDay();
 	else if (value == "weekday")
-		_changeWeekday();
+		_changeWeekday(beforeView);
 	else if (value == "agendaWeek")
-		_changeWeek();
+		_changeWeek(beforeView);
 	else if (value == "month")
-		_changeMonth();
-	var nowView = options.view;
-	if (beforeView == "weekday" || nowView == "weekday")
-		recycleFullCalendar();
+		_changeMonth(beforeView);
 
 	options.firstDay = defaultFirstDay;
 	element.fullCalendar("option", 'firstDay', options.firstDay);
@@ -188,17 +185,26 @@ _changeDay = function () {
 	options.view = "agendaDay";
 	return this;
 }
-_changeWeekday = function () {
-	element.fullCalendar("changeView", "agendaWeek");
+_changeWeekday = function (beforeView) {
+	element.fullCalendar("option", 'weekends', false);
+	if (beforeView != "agendaWeek") {
+		element.fullCalendar("changeView", "agendaWeek");
+	}
 	options.view = "weekday";
 	return this;
 }
-_changeWeek = function () {
+_changeWeek = function (beforeView) {
+	if (beforeView == "weekday") {
+		element.fullCalendar("option", 'weekends', true);
+	}
 	element.fullCalendar("changeView", "agendaWeek");
 	options.view = "agendaWeek";
 	return this;
 }
-_changeMonth = function () {
+_changeMonth = function (beforeView) {
+	if (beforeView == "weekday") {
+		element.fullCalendar("option", 'weekends', true);
+	}
 	element.fullCalendar("changeView", "month");
 	options.view = "month";
 	headerElement.hide();
