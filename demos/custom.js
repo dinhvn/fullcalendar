@@ -55,6 +55,14 @@ $(document).ready(function () {
 	$('#monthView').click(function () {
 		changeView('month');
 	});
+
+	$('#zoomin').click(function () {
+		zoom(-5);
+	});
+
+	$('#zoomout').click(function () {
+		zoom(5);
+	});
 });
 
 createFullCalendar = function (options) {
@@ -275,3 +283,11 @@ moveOneDay = function (type) {
 		}
 	}
 }
+
+zoom = (function (num) {
+	var slatHeight = element.find('.fc-time-grid .fc-slats td').height() + num;
+	element.find('.fc-time-grid .fc-slats td').css('height', slatHeight + 'px')
+	headerElement.find('.fc-time-grid .fc-slats td').css('height', slatHeight + 'px')
+	element.fullCalendar("updateSize");
+	headerElement.fullCalendar("updateSize");
+});

@@ -161,6 +161,9 @@ var Calendar = FC.Calendar = Class.extend(EmitterMixin, {
 		this.renderView();
 	},
 
+	updateSize: function() {
+		this.view.updateSize(true);
+	},
 
 	gotoDate: function(zonedDateInput) {
 		this.currentDate = this.moment(zonedDateInput).stripZone();
