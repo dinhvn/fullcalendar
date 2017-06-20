@@ -18,6 +18,7 @@ fcViews.agenda = {
 		hideAgendaScroller: false,
 		hideAgendaAxis: false,
 		hideAgendaContent: false,
+		slotHeight: 22,
 		slotDuration: '00:30:00',
 		slotEventOverlap: true // a bad name. confused with overlap/constraint system
 	}

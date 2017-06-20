@@ -82,7 +82,7 @@ var TimeGrid = FC.TimeGrid = Grid.extend(DayTableMixin, {
 				axisHtml = '';
 			} else {
 				axisHtml =
-					'<td class="fc-axis fc-time ' + view.widgetContentClass + '" ' + view.axisStyleAttr() + '>' +
+					'<td class="fc-axis fc-time ' + view.widgetContentClass + '" ' + view.axisStyleAttr(true) + '>' +
 						(isLabeled ?
 							'<span>' + // for matchCellWidths
 								htmlEscape(slotDate.format(this.labelFormat)) +
@@ -102,12 +102,13 @@ var TimeGrid = FC.TimeGrid = Grid.extend(DayTableMixin, {
 						(isRTL ? axisHtml : '') +
 					"</tr>";
 			} else {
+				var customHeightCSS = ' style="height:' + view.opt('slotHeight') + 'px"';
 				html +=
 					'<tr data-time="' + slotDate.format('HH:mm:ss') + '"' +
 						(isLabeled ? '' : ' class="fc-minor"') +
 						'>' +
 						(!isRTL ? axisHtml : '') +
-						'<td class="' + view.widgetContentClass + '"/>' +
+						'<td class="' + view.widgetContentClass + '"' + customHeightCSS + '/>' +
 						(isRTL ? axisHtml : '') +
 					"</tr>";
 			}
