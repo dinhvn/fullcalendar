@@ -966,7 +966,8 @@ Grid.mixin({
 		return {
 			'background-color': this.getSegBackgroundColor(seg),
 			'border-color': this.getSegBorderColor(seg),
-			color: this.getSegTextColor(seg)
+			color: this.getSegTextColor(seg),
+			opacity: this.getSegOpacity(seg)
 		};
 	},
 
@@ -1019,6 +1020,10 @@ Grid.mixin({
 
 		return source.textColor ||
 			this.view.opt('eventTextColor');
+	},
+
+	getSegOpacity: function(seg) {
+		return seg.event.opacity || 1;
 	},
 
 
