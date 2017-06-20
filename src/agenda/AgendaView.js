@@ -146,7 +146,7 @@ var AgendaView = FC.AgendaView = View.extend({
 
 
 	// Generates an HTML attribute string for setting the width of the axis, if it is known
-	axisStyleAttr: function(isHeight = false) {
+	axisStyleAttr: function(isHeight) {
 		if (this.axisWidth == null) {
 			 this.axisWidth = 0;
 		}
