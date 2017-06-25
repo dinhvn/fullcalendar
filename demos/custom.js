@@ -63,6 +63,15 @@ $(document).ready(function () {
 	$('#zoomout').click(function () {
 		zoom(5);
 	});
+
+	$('#rederDay').click(function () {
+		var event = {
+			title: '1111111111',
+			start: moment().add('days', 2).format('YYYY-MM-DD')
+		};
+
+		element.fullCalendar("renderEvent", event, true);
+	});
 });
 
 createFullCalendar = function (options) {
@@ -76,6 +85,13 @@ createFullCalendar = function (options) {
 			name: 'Nguyen Van A',
 			image: '../dist/b/out/content/images/profile.jpg'
 		},
+		eventLimit: true,
+		views: {
+			agenda: {
+				eventLimit: 3 // adjust to 6 only for agendaWeek/agendaDay
+			}
+		},
+		eventLimitAutoMonth: true,
 		nowIndicator: true,
 		hideAgendaGutter: true,
 		defaultView: options.view == "weekday" ? 'agendaWeek' : options.view,
@@ -87,10 +103,14 @@ createFullCalendar = function (options) {
 		navLinks: false, // can click day/week names to navigate views
 		editable: true,
 		selectable: true,
-		eventLimit: true, // allow "more" link when too many events
-		height: 500,
+		eventLimit: 4, // allow "more" link when too many events
+		height: $(window).height() - 100,
 		droppable: true,
-		weekends: options.view == "weekday" ? false : true
+		weekends: options.view == "weekday" ? false : true,
+		windowResize: function(view) {
+			element.fullCalendar('option', 'height', $(window).height() - 100);
+			headerElement.fullCalendar('option', 'height', $(window).height() - 100);
+		}
 	};
 
 	var configHeader = {
@@ -110,9 +130,13 @@ createFullCalendar = function (options) {
 		editable: true,
 		selectable: true,
 		eventLimit: true, // allow "more" link when too many events
-		height: 500,
+		height: $(window).height() - 100,
 		hideAgendaContent: true,
-		events: []
+		events: [],
+		windowResize: function(view) {
+			element.fullCalendar('option', 'height', $(window).height() - 100);
+			headerElement.fullCalendar('option', 'height', $(window).height() - 100);
+		}
 	};
 
 	headerElement.fullCalendar(configHeader);
@@ -140,6 +164,22 @@ renderEvent = function () {
 			start: moment().format('YYYY-MM-DD')
 		},
 		{
+			title: 'All Day Event',
+			start: moment().format('YYYY-MM-DD')
+		},
+		{
+			title: '1111111111',
+			start: moment().add('days', 2).format('YYYY-MM-DD')
+		},
+		{
+			title: '1111111111',
+			start: moment().add('days', 2).format('YYYY-MM-DD')
+		},
+		{
+			title: '1111111111',
+			start: moment().add('days', 2).format('YYYY-MM-DD')
+		},
+		{
 			title: 'Event 1',
 			start: moment().set('hour', 7).set('minute', 0),
 			end: moment().set('hour', 9).set('minute', 0),
@@ -152,6 +192,7 @@ renderEvent = function () {
 		{
 			title: 'Event 3',
 			start: moment().add('days', -2).set('hour', 7).set('minute', 0),
+			opacity: null
 		},
 		{
 			title: 'Event 4',

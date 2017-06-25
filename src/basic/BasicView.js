@@ -173,7 +173,9 @@ var BasicView = FC.BasicView = View.extend({
 
 	// Adjusts the vertical dimensions of the view to the specified values
 	setHeight: function(totalHeight, isAuto) {
-		var eventLimit = this.opt('eventLimit');
+		var eventLimit = this.opt('eventLimitAutoMonth') ?
+			Math.floor(((totalHeight / 6) - 21 - 10) / 20) :  // total row: 6, day height: 21, footer: 10, Row height: 20
+			this.opt('eventLimit');
 		var scrollerHeight;
 		var scrollbarWidths;
 
