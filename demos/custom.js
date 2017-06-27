@@ -91,6 +91,7 @@ createFullCalendar = function (options) {
 				eventLimit: 3 // adjust to 6 only for agendaWeek/agendaDay
 			}
 		},
+		fixedAllDayHeight: true,
 		eventLimitAutoMonth: true,
 		nowIndicator: true,
 		hideAgendaGutter: true,
@@ -103,13 +104,24 @@ createFullCalendar = function (options) {
 		navLinks: false, // can click day/week names to navigate views
 		editable: true,
 		selectable: true,
-		eventLimit: 4, // allow "more" link when too many events
 		height: $(window).height() - 100,
 		droppable: true,
 		weekends: options.view == "weekday" ? false : true,
 		windowResize: function(view) {
 			element.fullCalendar('option', 'height', $(window).height() - 100);
 			headerElement.fullCalendar('option', 'height', $(window).height() - 100);
+		},
+		allDayResize: function(num) {
+			console.log(num);
+			var h = 0;
+			var elm = $('.fc-row.fc-week.fc-widget-content');
+			elm.each(function( i ) {
+				var l = elm[i].offsetHeight;
+				if (l > h) {
+					h = l;
+				}
+			});
+			elm.height(h);
 		}
 	};
 
@@ -119,6 +131,13 @@ createFullCalendar = function (options) {
 			center: '',
 			right: ''
 		},
+		eventLimit: true, // allow "more" link when too many events
+		views: {
+			agenda: {
+				eventLimit: 3 // adjust to 6 only for agendaWeek/agendaDay
+			}
+		},
+		fixedAllDayHeight: true,
 		noneHeader: true,
 		nowIndicator: true,
 		hideAgendaGutter: true,
@@ -129,7 +148,6 @@ createFullCalendar = function (options) {
 		navLinks: true, // can click day/week names to navigate views
 		editable: true,
 		selectable: true,
-		eventLimit: true, // allow "more" link when too many events
 		height: $(window).height() - 100,
 		hideAgendaContent: true,
 		events: [],
@@ -170,6 +188,22 @@ renderEvent = function () {
 		{
 			title: '1111111111',
 			start: moment().add('days', 2).format('YYYY-MM-DD')
+		},
+		{
+			title: 'ghfhgf',
+			start: moment().add('days', 3).format('YYYY-MM-DD')
+		},{
+			title: 'ghfhgf',
+			start: moment().add('days', 3).format('YYYY-MM-DD')
+		},{
+			title: 'ghfhgf',
+			start: moment().add('days', 3).format('YYYY-MM-DD')
+		},{
+			title: 'ghfhgf',
+			start: moment().add('days', 3).format('YYYY-MM-DD')
+		},{
+			title: 'ghfhgf',
+			start: moment().add('days', 3).format('YYYY-MM-DD')
 		},
 		{
 			title: '1111111111',

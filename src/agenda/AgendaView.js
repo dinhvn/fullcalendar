@@ -238,6 +238,11 @@ var AgendaView = FC.AgendaView = View.extend({
 			if (eventLimit) {
 				this.dayGrid.limitRows(eventLimit);
 			}
+
+			// Set height for all-day row
+			if (this.opt('fixedAllDayHeight')) {
+				this.dayGrid.rowEls.height(eventLimit * 20);
+			}
 		}
 
 		if (!isAuto) { // should we force dimensions of the scroll container?
