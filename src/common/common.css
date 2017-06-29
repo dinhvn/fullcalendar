@@ -54,7 +54,7 @@ body .fc { /* extra precedence to overcome jqui */
 }
 
 .fc-highlight { /* when user is selecting cells */
-	background: #bce8f1;
+	background: #ff9900;
 	opacity: .3;
 }
 
@@ -909,4 +909,10 @@ a.fc-more:hover {
 
 .fc-time-grid-container::-webkit-scrollbar {
    
+}
+
+.fc-helper {
+	background: #ff9900;
+	opacity: 0.3 !important;
+	border: 1px solid #ff9900 !important;
 }

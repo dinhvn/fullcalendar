@@ -104,6 +104,7 @@ createFullCalendar = function (options) {
 		navLinks: false, // can click day/week names to navigate views
 		editable: true,
 		selectable: true,
+		selectHelper: true,
 		height: $(window).height() - 100,
 		droppable: true,
 		weekends: options.view == "weekday" ? false : true,
