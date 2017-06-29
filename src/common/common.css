@@ -916,3 +916,11 @@ a.fc-more:hover {
 	opacity: 0.3 !important;
 	border: 1px solid #ff9900 !important;
 }
+
+
+.fc .fc-time-grid .fc-axis span {
+	position: absolute;
+	right: 0px;
+	margin-top: -8px;
+	margin-right: 5px;
+}

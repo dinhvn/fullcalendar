@@ -91,6 +91,9 @@ createFullCalendar = function (options) {
 				eventLimit: 3 // adjust to 6 only for agendaWeek/agendaDay
 			}
 		},
+		slotDuration: '00:15:00',
+		snapDuration: '00:15:00',
+		slotLabelInterval: '01:00:00',
 		fixedAllDayHeight: true,
 		eventLimitAutoMonth: true,
 		nowIndicator: true,
@@ -138,6 +141,9 @@ createFullCalendar = function (options) {
 				eventLimit: 3 // adjust to 6 only for agendaWeek/agendaDay
 			}
 		},
+		slotDuration: '00:15:00',
+		snapDuration: '00:15:00',
+		slotLabelInterval: '01:00:00',
 		fixedAllDayHeight: true,
 		noneHeader: true,
 		nowIndicator: true,

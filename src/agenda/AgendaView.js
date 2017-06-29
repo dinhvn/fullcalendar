@@ -146,14 +146,20 @@ var AgendaView = FC.AgendaView = View.extend({
 
 
 	// Generates an HTML attribute string for setting the width of the axis, if it is known
-	axisStyleAttr: function(isHeight) {
+	axisStyleAttr: function(isHeight, isNoneBorderColor) {
 		if (this.axisWidth == null) {
 			 this.axisWidth = 0;
 		}
+
+		var style = 'style="width:' + this.axisWidth + 'px;'
 		if (isHeight) {
-			return 'style="width:' + this.axisWidth + 'px; height:'+ this.opt('slotHeight') + 'px"';
+			style += 'height:'+ this.opt('slotHeight') + 'px;'
 		}
-		return 'style="width:' + this.axisWidth + 'px"';
+		if (isNoneBorderColor) {
+			style += 'border-color: #f6f6f6;'
+		}
+		style += '"';
+		return style;
 	},
 
 

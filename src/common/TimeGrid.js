@@ -81,8 +81,9 @@ var TimeGrid = FC.TimeGrid = Grid.extend(DayTableMixin, {
 			if(view.opt('hideAgendaAxis')) {
 				axisHtml = '';
 			} else {
+				var isNoneBorderColor = isLabeled ? false : true;
 				axisHtml =
-					'<td class="fc-axis fc-time ' + view.widgetContentClass + '" ' + view.axisStyleAttr(true) + '>' +
+					'<td class="fc-axis fc-time ' + view.widgetContentClass + '" ' + view.axisStyleAttr(true, isNoneBorderColor) + '>' +
 						(isLabeled ?
 							'<span>' + // for matchCellWidths
 								htmlEscape(slotDate.format(this.labelFormat)) +
