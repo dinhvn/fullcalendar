@@ -258,6 +258,17 @@ TimeGrid.mixin({
 
 		classes.unshift('fc-time-grid-event', 'fc-v-event');
 
+		var isHideTime = false;
+		if (event.end === null) {
+			isHideTime = false;
+		} else {
+			var slotDuration = moment.duration(this.view.opt('slotDuration'));
+			var diffDuration = moment.duration(event.end.diff(event.start, 'minutes'), 'minutes');
+			if (slotDuration.minutes() === diffDuration.minutes()) {
+				isHideTime = true;
+			}
+		}
+
 		if (view.isMultiDayEvent(event)) { // if the event appears to span more than one day...
 			// Don't display time text on segments that run entirely through a day.
 			// That would appear as midnight-midnight and would look dumb.
@@ -286,6 +297,11 @@ TimeGrid.mixin({
 			'>' +
 				'<div class="fc-content">' +
 					'<div class="fc-event-head">' +
+						'<div class="fc-icon"></div>' +
+						(isHideTime ?
+							'<div class="fc-title">' +
+								htmlEscape(event.title) +
+							'</div>' :
 						(timeText ?
 							'<div class="fc-time"' +
 							' data-start="' + htmlEscape(startTimeText) + '"' +
@@ -294,10 +310,9 @@ TimeGrid.mixin({
 								'<span>' + htmlEscape(timeText) + '</span>' +
 							'</div>' :
 							''
-							) +
-						'<div class="fc-icon"></div>' +
+							)) +
 					'</div>' +
-					(event.title ?
+					(event.title && !isHideTime ?
 						'<div class="fc-title">' +
 							htmlEscape(event.title) +
 						'</div>' :

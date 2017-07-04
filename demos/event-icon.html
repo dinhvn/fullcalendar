@@ -22,12 +22,16 @@
 			navLinks: true, // can click day/week names to navigate views
 			selectable: true,
 			selectHelper: true,
+			slotDuration: '00:15:00',
+			snapDuration: '00:15:00',
+			slotLabelInterval: '01:00:00',
+			displayEventEnd: false,
+			//displayEventTime: false,
 			select: function(start, end) {
 				
 			},
 			eventRender: function(event, element) {
 				var iconDiv = element.find("div.fc-icon");
-				iconDiv.append($("<span class='icon-conference'/>"));
 				iconDiv.append($("<span class='icon-private'/>"));
 				iconDiv.append($("<span class='icon-breaktime'/>"));
 				iconDiv.append($("<span class='icon-alarm'/>"));
@@ -37,6 +41,12 @@
 			eventLimit: true, // allow "more" link when too many events
 			events: [
 				{
+					title: 'Day la even ngan',
+					start: '2017-05-09T08:00:00',
+					end: '2017-05-09T08:15:00',
+					color: '#c78ab3'
+				},
+				{
 					title: 'Long Event',
 					start: '2017-05-07',
 					end: '2017-05-10',
@@ -44,13 +54,11 @@
 					textColor: '#c78ab3'
 				},
 				{
-					id: 999,
 					title: 'Repeating Event',
 					start: '2017-05-09T16:00:00',
 					color: '#c78ab3'
 				},
 				{
-					id: 999,
 					title: 'Repeating Event',
 					start: '2017-05-16T16:00:00',
 					color: '#f2f2f2'
@@ -68,7 +76,7 @@
 					color: '#0e2f44'
 				},
 				{
-					title: 'Lunch',
+					title: 'Lunch aaaaa bbbb cccc',
 					start: '2017-05-12T12:00:00',
 					color: '#839485'
 				},

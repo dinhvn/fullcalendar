@@ -130,13 +130,13 @@ DayGrid.mixin({
 			'>' +
 				'<div class="fc-content">' +
 					'<div class="fc-event-head">' +
+						'<div class="fc-icon"></div>' +
 						'<div class="fc-day-title"' +
 						(this.isRTL ?
 							titleHtml + ' ' + timeHtml : // put a natural space in between
 							timeHtml + ' ' + titleHtml   //
 							) +
 						'</div>' +
-						'<div class="fc-icon"></div>' +
 					'</div>' +
 				'</div>' +
 				(isResizableFromStart ?

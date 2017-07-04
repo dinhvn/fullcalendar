@@ -829,6 +829,7 @@ a.fc-more:hover {
 
 .fc-event .fc-event-head .fc-time {
 	flex: 1 1 0%;
+	font-weight: bold;
 }
 
 .fc-event .fc-event-head .fc-icon {
@@ -838,6 +839,19 @@ a.fc-more:hover {
 
 .fc-event .fc-event-head .fc-day-title {
 	flex: 1 1 0%;
+	font-weight: bold;
+}
+
+.fc-time-grid-event .fc-title {
+	font-weight: bold;
+}
+
+.fc-event .fc-event-head .fc-title {
+	font-size: 1em !important;
+}
+
+.fc-popover .fc-header .fc-title {
+	font-weight: bold;
 }
 
 /* Header */
