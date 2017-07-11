@@ -79,7 +79,12 @@ var Popover = Class.extend(ListenerMixin, {
 	// Triggered when the user clicks *anywhere* in the document, for the autoHide feature
 	documentMousedown: function(ev) {
 		// only hide the popover if the click happened outside the popover
-		if (this.el && !$(ev.target).closest(this.el).length) {
+		var ignore = this.options.unHidePopoverCancel;
+		var autoHide = true;
+		if (ignore && $(ev.target).closest(ignore).length) {
+			autoHide = false;
+		}
+		if (this.el && !$(ev.target).closest(this.el).length && autoHide) {
 			this.hide();
 		}
 	},

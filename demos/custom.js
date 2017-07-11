@@ -116,6 +116,7 @@ createFullCalendar = function (options) {
 			headerElement.fullCalendar('option', 'height', $(window).height() - 100);
 		},
 		dayPopoverFormat:'ddd YYYY.MM.DD',
+		unHidePopoverCancel: '.menu-left',
 		allDayResize: function(num) {
 			console.log(num);
 			var h = 0;

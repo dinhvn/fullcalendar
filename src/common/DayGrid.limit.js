@@ -245,6 +245,7 @@ DayGrid.mixin({
 			top: topEl.offset().top,
 			autoHide: true, // when the user clicks elsewhere, hide the popover
 			viewportConstrain: view.opt('popoverViewportConstrain'),
+			unHidePopoverCancel: view.opt('unHidePopoverCancel'),
 			hide: function() {
 				// kill everything when the popover is hidden
 				// notify events to be removed
