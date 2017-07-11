@@ -115,6 +115,7 @@ createFullCalendar = function (options) {
 			element.fullCalendar('option', 'height', $(window).height() - 100);
 			headerElement.fullCalendar('option', 'height', $(window).height() - 100);
 		},
+		dayPopoverFormat:'ddd YYYY.MM.DD',
 		allDayResize: function(num) {
 			console.log(num);
 			var h = 0;
@@ -126,6 +127,13 @@ createFullCalendar = function (options) {
 				}
 			});
 			elm.height(h);
+		},
+		eventLimitText: function(num) {
+			return '+' + num + ' more';
+		},
+		eventClick: function( event, jsEvent, view ) {
+			console.log(event);
+			var a = Object.assign({}, event);
 		}
 	};
 
